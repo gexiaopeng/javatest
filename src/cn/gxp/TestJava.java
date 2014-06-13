@@ -31,7 +31,7 @@ public class TestJava {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-	  
+	     //test
 		synJava();
 	}
 	public static void synJava(){
