@@ -89,7 +89,7 @@ public class Number62 {
 	 */  
 	public static void main(String[] args) {  
 		// TODO Auto-generated method stub  
-		System.out.println("62System=" +_10_to_62(Long.parseLong("3517460589765"), 5));  
+		System.out.println("62System=" +_10_to_62(Long.parseLong("35174605897653"), 5));  
 		System.out.println("10System=" +convertBase62ToDecimal("000002NaWL"));  
 	}  
 
