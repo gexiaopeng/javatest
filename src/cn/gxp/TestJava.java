@@ -1,5 +1,8 @@
 package cn.gxp;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
 import cn.gxp.thread.ThreadA;
 import cn.gxp.thread.ThreadB;
 
@@ -32,7 +35,26 @@ public class TestJava {
 	 */
 	public static void main(String[] args) {
 	     //test
-		synJava();
+		try {
+			mytest();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static void mytest(){
+		String url="http://zhili.yofogo.com/";
+		//url="http://www.mof.gov.cn/zhengwuxinxi/bulinggonggao/tongzhitonggao/?jjj=2";
+		//url="http://item.taobao.com/item.htm?spm=a215f.6985601.1995840397.2.sjZu07";
+		//url="http://www.weatao.com";
+		//url="http://www.weather.com.cn/photo/2013/12/gqt/2014066.shtml";
+		url="http://js.iwififree.com/wifiPortal/index.jsp";
+		url="http://vdisk.weibo.com/";
+		WebDriver driver =new HtmlUnitDriver();
+		driver.get(url);
+		System.out.println("{"+driver.getTitle()+"}");
+		String html = driver.getPageSource();
+		System.out.println(html);
 	}
 	public static void synJava(){
 		SynJava synJava=new SynJava();
