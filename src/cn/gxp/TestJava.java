@@ -1,5 +1,7 @@
 package cn.gxp;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -36,13 +38,23 @@ public class TestJava {
 	public static void main(String[] args) {
 	     //test
 		try {
-			mytest();
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	public static void mytest(){
+	private static void getHtml() throws Exception{
+		String url="http://zhili.yofogo.com/";
+		url="http://www.mof.gov.cn/zhengwuxinxi/bulinggonggao/tongzhitonggao/";
+	   // url="http://item.taobao.com/item.htm?spm=a215f.6985601.1995840397.2.sjZu07";
+		//url="http://www.weatao.com/";
+		Document doc=null;
+		doc=Jsoup.connect(url).header("User-Agent", "Mozilla/5.0 (Windows NT 5.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.101 Safari/537.36").header("Accept-Encoding", "").get();
+
+		System.out.println(doc.html()); 
+	}
+	public static void getPageSource(){
 		String url="http://zhili.yofogo.com/";
 		//url="http://www.mof.gov.cn/zhengwuxinxi/bulinggonggao/tongzhitonggao/?jjj=2";
 		//url="http://item.taobao.com/item.htm?spm=a215f.6985601.1995840397.2.sjZu07";
