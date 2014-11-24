@@ -80,10 +80,12 @@ public class TestJava {
 		String s="中国086adssad是落地计费螺丝钉李方军我俄日物品为日tyutyutyu6511";
 		//5Lit5Zu9MDg2YWRzc2Fk5piv6JC95Zyw6K6h6LS56J665Lid6ZKJ5p2O5pa55Yab5oiR5L+E5pel54mp5ZOB5Li65peldHl1dHl1dHl1NjUxMQ==
 		//5Lit5Zu9MDg2YWRzc2Fk5piv6JC95Zyw6K6h6LS56J665Lid6ZKJ5p2O5pa55Yab5oiR5L+E5pel54mp5ZOB5Li65peldHl1dHl1dHl1NjUxMQAA
+		
 		//5Lit5Zu9MDg2YWRzc2Fk5piv6JC95Zyw6K6h6LS56J665Lid6ZKJ5p2O5pa55Yab5oiR5L+E5pel54mp5ZOB5Li65peldHl1dHl1dHl1NjUxMQ==
 		//5Lit5Zu9MDg2YWRzc2Fk5piv6JC95Zyw6K6h6LS56J665Lid6ZKJ5p2O5pa55Yab5oiR5L-E5pel54mp5ZOB5Li65peldHl1dHl1dHl1NjUxMQ
+		
 		byte[] b=s.getBytes();
-		String e = "Base64.e";
+		String e = Base64.encodeBase64String(b);
 		String d = new String(Base64.decodeBase64(e));
 		
 		System.out.println("密文e：[" + e+"]"+e.length());
