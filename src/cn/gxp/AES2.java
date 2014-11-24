@@ -1,8 +1,4 @@
 package cn.gxp;
-
-
-
-import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -23,19 +19,19 @@ import javax.crypto.spec.SecretKeySpec;
  *
  */
 public class AES2 {
-	
+
 	static final String algorithmStr="AES/ECB/NoPadding";
-	
+
 	static private KeyGenerator keyGen;
-	
+
 	static private Cipher cipher;
-	
+
 	static boolean isInited=false;
-	
+
 	//初始化
 	static private void init()
 	{
-		
+
 		//初始化keyGen
 		try {
 			keyGen=KeyGenerator.getInstance("AES");
@@ -44,7 +40,7 @@ public class AES2 {
 			e.printStackTrace();
 		}
 		keyGen.init(128);
-		
+
 		//初始化cipher
 		try {
 			cipher=Cipher.getInstance(algorithmStr);
@@ -55,28 +51,28 @@ public class AES2 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		isInited=true;
 	}
-	
+
 	public static byte[] encrypt(byte[] content,byte[] keyBytes)
 	{
 		byte[] encryptedText=null;
-		
+
 		if(!isInited)//为初始化
 		{
 			init();
 		}
-		
+
 		Key key=new SecretKeySpec(keyBytes,"AES");
-		
+
 		try {
 			cipher.init(Cipher.ENCRYPT_MODE, key);
 		} catch (InvalidKeyException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		try {
 			encryptedText=cipher.doFinal(content);
 		} catch (IllegalBlockSizeException e) {
@@ -86,10 +82,10 @@ public class AES2 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return encryptedText;
 	}
-	
+
 	//解密为byte[]
 	public static byte[] decryptToBytes(byte[] content,byte[] keyBytes){
 		byte[] originBytes=null;
@@ -113,73 +109,73 @@ public class AES2 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return originBytes;
 	}
-	
+
 	/** 
-	* 将16进制转换为二进制 
-	* 
-	* @param hexStr 
-	* @return byte[] 
-	*/ 
+	 * 将16进制转换为二进制 
+	 * 
+	 * @param hexStr 
+	 * @return byte[] 
+	 */ 
 	public static byte[] parseHexStr2Byte(String hexStr) { 
 		if (hexStr.length() < 1) 
 			return null; 
-	byte[] result = new byte[hexStr.length() / 2]; 
-	for (int i = 0; i < hexStr.length() / 2; i++) { 
-	int high = Integer.parseInt(hexStr.substring(i * 2, i * 2 + 1), 16); 
-	int low = Integer.parseInt(hexStr.substring(i * 2 + 1, i * 2 + 2), 16); 
-	result[i] = (byte) (high * 16 + low); 
-	} 
+		byte[] result = new byte[hexStr.length() / 2]; 
+		for (int i = 0; i < hexStr.length() / 2; i++) { 
+			int high = Integer.parseInt(hexStr.substring(i * 2, i * 2 + 1), 16); 
+			int low = Integer.parseInt(hexStr.substring(i * 2 + 1, i * 2 + 2), 16); 
+			result[i] = (byte) (high * 16 + low); 
+		} 
 		return result; 
 	} 
-	
+
 	/** 
-	* 将二进制转换成16进制 
-	* 
-	* @param buf 
-	* @return String 
-	*/ 
+	 * 将二进制转换成16进制 
+	 * 
+	 * @param buf 
+	 * @return String 
+	 */ 
 	public static String parseByte2HexStr(byte buf[]) { 
-	StringBuffer sb = new StringBuffer(); 
-	for (int i = 0; i < buf.length; i++) { 
-		String hex = Integer.toHexString(buf[i] & 0xFF); 
-	if (hex.length() == 1) { 
-		hex = '0' + hex; 
-	} 
-	sb.append(hex.toUpperCase()); 
-	} 
-	return sb.toString(); 
-	} 
-	
-	public static byte[] hexStringToBytes(String hexString) {  
-	    if (hexString == null || hexString.equals("")) {  
-	        return null;  
-	    }  
-	    hexString = hexString.toUpperCase();  
-	    int length = hexString.length() / 2;  
-	    char[] hexChars = hexString.toCharArray();  
-	    byte[] d = new byte[length];  
-	    for (int i = 0; i < length; i++) {  
-	        int pos = i * 2;  
-	        d[i] = (byte) (charToByte(hexChars[pos]) << 4 | charToByte(hexChars[pos + 1]));  
-	    }  
-	    return d;  
-	}  
-	 private static byte charToByte(char c) {  
-		    return (byte) "0123456789ABCDEF".indexOf(c);  
+		StringBuffer sb = new StringBuffer(); 
+		for (int i = 0; i < buf.length; i++) { 
+			String hex = Integer.toHexString(buf[i] & 0xFF); 
+			if (hex.length() == 1) { 
+				hex = '0' + hex; 
+			} 
+			sb.append(hex.toUpperCase()); 
 		} 
+		return sb.toString(); 
+	} 
+
+	public static byte[] hexStringToBytes(String hexString) {  
+		if (hexString == null || hexString.equals("")) {  
+			return null;  
+		}  
+		hexString = hexString.toUpperCase();  
+		int length = hexString.length() / 2;  
+		char[] hexChars = hexString.toCharArray();  
+		byte[] d = new byte[length];  
+		for (int i = 0; i < length; i++) {  
+			int pos = i * 2;  
+			d[i] = (byte) (charToByte(hexChars[pos]) << 4 | charToByte(hexChars[pos + 1]));  
+		}  
+		return d;  
+	}  
+	private static byte charToByte(char c) {  
+		return (byte) "0123456789ABCDEF".indexOf(c);  
+	} 
 	public static void main(String[] args) throws Exception {
 		String constr = "F817131A6EEC90F95213226341CEA17A";
 		String key = "02060F080B0802040E0F0409090A050C";
-		
-		 constr = "E4A164FC17F2378089350D038DFD97C7";
-		 key = "0F0801050D0D030E0701040206050402";
-		 
-		 constr = "E48F17E847992B98A001596ABFB9FAE93E536613B2ECFA7EFB28B9FA53D9E632993020F99AF3E6DC89779C70EB1E1A65";
-		 key = "02060F080B0802040E0F0409090A050C";
-		
+
+		constr = "E4A164FC17F2378089350D038DFD97C7";
+		key = "0F0801050D0D030E0701040206050402";
+
+		constr = "E48F17E847992B98A001596ABFB9FAE93E536613B2ECFA7EFB28B9FA53D9E632993020F99AF3E6DC89779C70EB1E1A65";
+		key = "02060F080B0802040E0F0409090A050C";
+
 		byte[] midbytes = hexStringToBytes(key);
 		byte[] con = hexStringToBytes(constr);
 		byte[] aa = decryptToBytes(con,midbytes);
@@ -187,9 +183,9 @@ public class AES2 {
 		System.out.println("constr1:"+constr);
 		String dec=new String(aa,"gbk");
 		System.out.println("["+dec+"]"+dec.getBytes().length);
-		
+
 		byte[] bb=encrypt(aa,midbytes);
 		System.out.println("constr2:"+parseByte2HexStr(bb)+"");
-		
+
 	}
 }
