@@ -1,10 +1,12 @@
 package cn.gxp;
 
 import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -36,46 +38,38 @@ public class AES {
 	 * @param content 需要加密的内容
 	 * @param password  加密密码
 	 * @return
+	 * @throws Exception 
 	 */ 
-	public static byte[] encrypt(String content, String password) { 
-		try {            
-			KeyGenerator kgen = KeyGenerator.getInstance("AES"); 
-			kgen.init(128, new SecureRandom(password.getBytes())); 
-			SecretKey secretKey = kgen.generateKey(); 
-			byte[] enCodeFormat = secretKey.getEncoded(); 
-			SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES"); 
-			Cipher cipher = Cipher.getInstance("AES");// 创建密码器 
-			byte[] byteContent = content.getBytes("utf-8"); 
-			cipher.init(Cipher.ENCRYPT_MODE, key);// 初始化 
-			byte[] result = cipher.doFinal(byteContent); 
-			return result; // 加密 
+	public static byte[] encrypt(String content, String password) throws Exception { 
 
-		} catch (Exception e) { 
-			e.printStackTrace(); 
-		} 
-		return null; 
+		KeyGenerator kgen = KeyGenerator.getInstance("AES"); 
+		kgen.init(128, new SecureRandom(password.getBytes())); 
+		SecretKey secretKey = kgen.generateKey(); 
+		byte[] enCodeFormat = secretKey.getEncoded(); 
+		SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES"); 
+		Cipher cipher = Cipher.getInstance("AES");// 创建密码器 
+		byte[] byteContent = content.getBytes("utf-8"); 
+		cipher.init(Cipher.ENCRYPT_MODE, key);// 初始化 
+		byte[] result = cipher.doFinal(byteContent); 
+		return result; // 加密 
 	} 
 	/**解密
 	 * @param content  待解密内容
 	 * @param password 解密密钥
 	 * @return
+	 * @throws Exception 
 	 */ 
-	public static byte[] decrypt(byte[] content, String password) { 
-		try { 
-			KeyGenerator kgen = KeyGenerator.getInstance("AES"); 
-			//kgen.init(128, new SecureRandom(password.getBytes())); 
-			kgen.init(128, new SecureRandom(parseHexStr2Byte(password)));
-			SecretKey secretKey = kgen.generateKey(); 
-			byte[] enCodeFormat = secretKey.getEncoded(); 
-			SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");             
-			Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");// 创建密码器 
-			cipher.init(Cipher.DECRYPT_MODE, key);// 初始化 
-			byte[] result = cipher.doFinal(content); 
-			return result; // 加密 
-		} catch (Exception e) { 
-			e.printStackTrace(); 
-		} 
-		return null; 
+	public static byte[] decrypt(byte[] content, String password) throws Exception { 
+		KeyGenerator kgen = KeyGenerator.getInstance("AES"); 
+		//kgen.init(128, new SecureRandom(password.getBytes())); 
+		kgen.init(128, new SecureRandom(parseHexStr2Byte(password)));
+		SecretKey secretKey = kgen.generateKey(); 
+		byte[] enCodeFormat = secretKey.getEncoded(); 
+		SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");             
+		Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");// 创建密码器 
+		cipher.init(Cipher.DECRYPT_MODE, key);// 初始化 
+		byte[] result = cipher.doFinal(content); 
+		return result; // 加密 
 	} 
 	/**将16进制转换为二进制
 	 * @param hexStr
@@ -107,62 +101,56 @@ public class AES {
 		} 
 		return sb.toString(); 
 	} 
-	  /** 加密
-      *
-      * @param content 需要加密的内容
-      * @param password  加密密码
-      * @return
-      */ 
-     public static byte[] encrypt2(String content, String password) { 
-             try { 
-                     SecretKeySpec key = new SecretKeySpec(password.getBytes(), "AES"); 
-                     Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding"); 
-                     byte[] byteContent = content.getBytes("utf-8"); 
-                     cipher.init(Cipher.ENCRYPT_MODE, key);// 初始化 
-                     byte[] result = cipher.doFinal(byteContent); 
-                     return result; // 加密 
-             } catch (Exception e) { 
-                     e.printStackTrace(); 
-             } 
-             return null; 
-     } 
-     /** 
-     *解密
-     * @param content 需要加密的内容
-     * @param password  加密密码
-     * @return
-     */ 
-    public static byte[] dencrypt2(String content, String password) { 
-            try { 
-                    SecretKeySpec key = new SecretKeySpec(parseHexStr2Byte(password), "AES"); 
-                    Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding"); 
-                    byte[] byteContent =  parseHexStr2Byte(content); 
-                    cipher.init(Cipher.DECRYPT_MODE, key);// 初始化 
-                    byte[] result = cipher.doFinal(byteContent); 
-                    return result; // 加密 
-            } catch (Exception e) { 
-                    e.printStackTrace(); 
-            } 
-            return null; 
-    } 
+	/** 加密
+	 *
+	 * @param content 需要加密的内容
+	 * @param password  加密密码
+	 * @return
+	 * @throws NoSuchPaddingException 
+	 * @throws Exception 
+	 */ 
+	public static byte[] encrypt2(String content, String password) throws Exception, NoSuchPaddingException { 
+
+		SecretKeySpec key = new SecretKeySpec(password.getBytes(), "AES"); 
+		Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding"); 
+		byte[] byteContent = content.getBytes("utf-8"); 
+		cipher.init(Cipher.ENCRYPT_MODE, key);// 初始化 
+		byte[] result = cipher.doFinal(byteContent); 
+		return result; // 加密 
+
+	} 
+	/** 
+	 *解密
+	 * @param content 需要加密的内容
+	 * @param password  加密密码
+	 * @return
+	 * @throws NoSuchPaddingException 
+	 * @throws NoSuchAlgorithmException 
+	 */ 
+	public static byte[] dencrypt2(String content, String password) throws Exception { 
+		SecretKeySpec key = new SecretKeySpec(parseHexStr2Byte(password), "AES"); 
+		Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding"); 
+		byte[] byteContent =  parseHexStr2Byte(content); 
+		cipher.init(Cipher.DECRYPT_MODE, key);// 初始化 
+		byte[] result = cipher.doFinal(byteContent); 
+		return result; // 加密 
+	} 
 	public static void main(String[] args) {
-		String content = "test"; 
-		String password = "12345678"; 
-		password="02060F080B0802040E0F0409090A050C";
-		//加密 
-		System.out.println("加密前：" + content); 
-		byte[] encryptResult = encrypt(content, password); 
-		String encryptResultStr = parseByte2HexStr(encryptResult); 
-		System.out.println("加密后：" + encryptResultStr); 
-		//解密 
-		encryptResultStr="F817131A6EEC90F95213226341CEA17A";
-		//byte[] decryptFrom = dencrypt2(encryptResultStr); 
-		byte[] decryptResult = dencrypt2(encryptResultStr,password); 
-		
 		try {
+			String content = "test111111111111"; 
+			String password = "1234567811111111"; 
+			password="02060F080B0802040E0F0409090A050C";
+			//加密 
+			System.out.println("加密前：" + content); 
+			byte[] encryptResult = encrypt2(content, password); 
+			String encryptResultStr = parseByte2HexStr(encryptResult); 
+			System.out.println("加密后：" + encryptResultStr); 
+			//解密 
+			//encryptResultStr="58CE80E12D4A75446AF46997579824BE";
+			byte[] decryptResult = dencrypt2(encryptResultStr,password);
 			//A3BFA3BFA3BF00000000000000000000
-			//System.out.println("解密后：" + parseByte2HexStr(decryptResult));
-			System.out.println(new String(parseHexStr2Byte("A3BFA3BFA3BF")));
+			System.out.println("解密后1：" + new String(decryptResult,"utf-8"));
+			System.out.println("解密后e：" + parseByte2HexStr(decryptResult));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

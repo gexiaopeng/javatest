@@ -1,4 +1,5 @@
 package cn.gxp;
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -166,26 +167,33 @@ public class AES2 {
 	private static byte charToByte(char c) {  
 		return (byte) "0123456789ABCDEF".indexOf(c);  
 	} 
-	public static void main(String[] args) throws Exception {
-		String constr = "F817131A6EEC90F95213226341CEA17A";
-		String key = "02060F080B0802040E0F0409090A050C";
+	public static void main(String[] args){
+		try {
+			String constr = "F817131A6EEC90F95213226341CEA17A";
+			String key = "02060F080B0802040E0F0409090A050C";
 
-		constr = "E4A164FC17F2378089350D038DFD97C7";
-		key = "0F0801050D0D030E0701040206050402";
+			constr = "E4A164FC17F2378089350D038DFD97C7";
+			key = "0F0801050D0D030E0701040206050402";
 
-		constr = "E48F17E847992B98A001596ABFB9FAE93E536613B2ECFA7EFB28B9FA53D9E632993020F99AF3E6DC89779C70EB1E1A65";
-		key = "02060F080B0802040E0F0409090A050C";
+			constr = "E48F17E847992B98A001596ABFB9FAE93E536613B2ECFA7EFB28B9FA53D9E632993020F99AF3E6DC89779C70EB1E1A65";
+			key = "02060F080B0802040E0F0409090A050C";
 
-		byte[] midbytes = hexStringToBytes(key);
-		byte[] con = hexStringToBytes(constr);
-		byte[] aa = decryptToBytes(con,midbytes);
-		//String ss = parseByte2HexStr(aa);
-		System.out.println("constr1:"+constr);
-		String dec=new String(aa,"gbk");
-		System.out.println("["+dec+"]"+dec.getBytes().length);
+			byte[] midbytes = hexStringToBytes(key);
+			byte[] con = hexStringToBytes(constr);
+			byte[] aa = decryptToBytes(con,midbytes);
+			//String ss = parseByte2HexStr(aa);
+			System.out.println("constr1:"+constr);
+			String dec=new String(aa,"gbk");
+			System.out.println("dec["+dec+"]"+dec.getBytes("gbk").length);
 
-		byte[] bb=encrypt(aa,midbytes);
-		System.out.println("constr2:"+parseByte2HexStr(bb)+"");
+			byte[] bb=encrypt(dec.getBytes("gbk"),midbytes);
+			System.out.println("constr2:"+parseByte2HexStr(bb)+"");
+			decryptToBytes(bb,midbytes);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 
 	}
 }
