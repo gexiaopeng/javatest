@@ -5,6 +5,7 @@ import org.jsoup.nodes.Document;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+
 import cn.gxp.thread.ThreadA;
 import cn.gxp.thread.ThreadB;
 
@@ -38,7 +39,7 @@ public class TestJava {
 	public static void main(String[] args) {
 	     //test
 		try {
-			
+			base64();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,6 +75,20 @@ public class TestJava {
 		ThreadB threadB =new ThreadB(synJava);
 		threadA.start();
 		threadB.start();
+	}
+	public static void base64(){
+		String s="中国086adssad是落地计费螺丝钉李方军我俄日物品为日tyutyutyu6511";
+		//5Lit5Zu9MDg2YWRzc2Fk5piv6JC95Zyw6K6h6LS56J665Lid6ZKJ5p2O5pa55Yab5oiR5L+E5pel54mp5ZOB5Li65peldHl1dHl1dHl1NjUxMQ==
+		//5Lit5Zu9MDg2YWRzc2Fk5piv6JC95Zyw6K6h6LS56J665Lid6ZKJ5p2O5pa55Yab5oiR5L+E5pel54mp5ZOB5Li65peldHl1dHl1dHl1NjUxMQAA
+		//5Lit5Zu9MDg2YWRzc2Fk5piv6JC95Zyw6K6h6LS56J665Lid6ZKJ5p2O5pa55Yab5oiR5L+E5pel54mp5ZOB5Li65peldHl1dHl1dHl1NjUxMQ==
+		//5Lit5Zu9MDg2YWRzc2Fk5piv6JC95Zyw6K6h6LS56J665Lid6ZKJ5p2O5pa55Yab5oiR5L-E5pel54mp5ZOB5Li65peldHl1dHl1dHl1NjUxMQ
+		byte[] b=s.getBytes();
+		String e = "Base64.e";
+		String d = new String(Base64.decodeBase64(e));
+		
+		System.out.println("密文e：[" + e+"]"+e.length());
+		System.out.println("原文s：[" + s+"]");
+		System.out.println("原文d：[" + d+"]");
 	}
 
 }
