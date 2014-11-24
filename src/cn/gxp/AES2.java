@@ -59,16 +59,7 @@ public class AES2 {
 		isInited=true;
 	}
 	
-	public static byte[] GenKey()
-	{
-		if(!isInited)//如果没有初始化过,则初始化
-		{
-			init();
-		}
-		return keyGen.generateKey().getEncoded();
-	}
-	
-	public static byte[] Encrypt(byte[] content,byte[] keyBytes)
+	public static byte[] encrypt(byte[] content,byte[] keyBytes)
 	{
 		byte[] encryptedText=null;
 		
@@ -100,7 +91,7 @@ public class AES2 {
 	}
 	
 	//解密为byte[]
-	public static byte[] DecryptToBytes(byte[] content,byte[] keyBytes){
+	public static byte[] decryptToBytes(byte[] content,byte[] keyBytes){
 		byte[] originBytes=null;
 		if(!isInited){
 			init();
@@ -191,9 +182,14 @@ public class AES2 {
 		
 		byte[] midbytes = hexStringToBytes(key);
 		byte[] con = hexStringToBytes(constr);
-		byte[] aa = DecryptToBytes(con,midbytes);
+		byte[] aa = decryptToBytes(con,midbytes);
 		//String ss = parseByte2HexStr(aa);
-		//System.out.println(ss);
-		System.out.println(new String(aa,"gbk").trim());
+		System.out.println("constr1:"+constr);
+		String dec=new String(aa,"gbk");
+		System.out.println("["+dec+"]"+dec.getBytes().length);
+		
+		byte[] bb=encrypt(aa,midbytes);
+		System.out.println("constr2:"+parseByte2HexStr(bb)+"");
+		
 	}
 }
