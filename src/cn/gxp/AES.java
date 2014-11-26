@@ -1,6 +1,6 @@
 package cn.gxp;
 
-import java.io.UnsupportedEncodingException;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
@@ -61,8 +61,8 @@ public class AES {
 	 */ 
 	public static byte[] decrypt(byte[] content, String password) throws Exception { 
 		KeyGenerator kgen = KeyGenerator.getInstance("AES"); 
-		//kgen.init(128, new SecureRandom(password.getBytes())); 
-		kgen.init(128, new SecureRandom(parseHexStr2Byte(password)));
+		kgen.init(128, new SecureRandom(password.getBytes())); 
+		//kgen.init(128, new SecureRandom(parseHexStr2Byte(password)));
 		SecretKey secretKey = kgen.generateKey(); 
 		byte[] enCodeFormat = secretKey.getEncoded(); 
 		SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");             
@@ -101,56 +101,20 @@ public class AES {
 		} 
 		return sb.toString(); 
 	} 
-	/** 加密
-	 *
-	 * @param content 需要加密的内容
-	 * @param password  加密密码
-	 * @return
-	 * @throws NoSuchPaddingException 
-	 * @throws Exception 
-	 */ 
-	public static byte[] encrypt2(String content, String password) throws Exception, NoSuchPaddingException { 
-
-		SecretKeySpec key = new SecretKeySpec(password.getBytes(), "AES"); 
-		Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding"); 
-		byte[] byteContent = content.getBytes("utf-8"); 
-		cipher.init(Cipher.ENCRYPT_MODE, key);// 初始化 
-		byte[] result = cipher.doFinal(byteContent); 
-		return result; // 加密 
-
-	} 
-	/** 
-	 *解密
-	 * @param content 需要加密的内容
-	 * @param password  加密密码
-	 * @return
-	 * @throws NoSuchPaddingException 
-	 * @throws NoSuchAlgorithmException 
-	 */ 
-	public static byte[] dencrypt2(String content, String password) throws Exception { 
-		SecretKeySpec key = new SecretKeySpec(parseHexStr2Byte(password), "AES"); 
-		Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding"); 
-		byte[] byteContent =  parseHexStr2Byte(content); 
-		cipher.init(Cipher.DECRYPT_MODE, key);// 初始化 
-		byte[] result = cipher.doFinal(byteContent); 
-		return result; // 加密 
-	} 
 	public static void main(String[] args) {
 		try {
-			String content = "test111111111111"; 
+			String content = "test111111111111erter我是登陆福建额外连接?=-2341"; 
 			String password = "1234567811111111"; 
 			password="02060F080B0802040E0F0409090A050C";
 			//加密 
 			System.out.println("加密前：" + content); 
-			byte[] encryptResult = encrypt2(content, password); 
-			String encryptResultStr = parseByte2HexStr(encryptResult); 
+			byte[] encryptResult = encrypt(content, password); 
+			String encryptResultStr = Base64.encodeBase64URLSafeString(encryptResult); 
+			//encryptResultStr=new String(Base64.encodeBase64(encryptResult));
 			System.out.println("加密后：" + encryptResultStr); 
 			//解密 
-			//encryptResultStr="58CE80E12D4A75446AF46997579824BE";
-			byte[] decryptResult = dencrypt2(encryptResultStr,password);
-			//A3BFA3BFA3BF00000000000000000000
-			System.out.println("解密后1：" + new String(decryptResult,"utf-8"));
-			System.out.println("解密后e：" + parseByte2HexStr(decryptResult));
+			byte[] decryptResult = decrypt(Base64.decodeBase64(encryptResultStr),password);
+			System.out.println("解密后：" + new String(decryptResult,"utf-8"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
