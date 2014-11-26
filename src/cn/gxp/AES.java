@@ -47,7 +47,7 @@ public class AES {
 		SecretKey secretKey = kgen.generateKey(); 
 		byte[] enCodeFormat = secretKey.getEncoded(); 
 		SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES"); 
-		Cipher cipher = Cipher.getInstance("AES");// 创建密码器 
+		Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");// 创建密码器 
 		byte[] byteContent = content.getBytes("utf-8"); 
 		cipher.init(Cipher.ENCRYPT_MODE, key);// 初始化 
 		byte[] result = cipher.doFinal(byteContent); 
@@ -62,7 +62,6 @@ public class AES {
 	public static byte[] decrypt(byte[] content, String password) throws Exception { 
 		KeyGenerator kgen = KeyGenerator.getInstance("AES"); 
 		kgen.init(128, new SecureRandom(password.getBytes())); 
-		//kgen.init(128, new SecureRandom(parseHexStr2Byte(password)));
 		SecretKey secretKey = kgen.generateKey(); 
 		byte[] enCodeFormat = secretKey.getEncoded(); 
 		SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");             
