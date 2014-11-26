@@ -1,6 +1,7 @@
 package cn.gxp;
 
 
+import java.net.URLEncoder;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
