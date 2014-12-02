@@ -146,7 +146,6 @@ public class TestJava {
 		String url="http://www.baidu.com/";
 		WebDriver page = new HtmlUnitDriver(); 
 		page.get(url);  
-
 		WebElement searchBox = page.findElement(By.name("wd"));  
 		searchBox.sendKeys("JavaEye");  
 
