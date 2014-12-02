@@ -55,9 +55,9 @@ public class TestJava {
 		//test
 		try {
 			//base64();
-			//getHtml();
+			getHtml();
 			//getPageSource();
-			httpclientGet();
+			//httpclientGet();
 			//httpclientPost();
 			//testHasAnImageSearchPage();
 		} catch (Exception e) {
@@ -73,7 +73,7 @@ public class TestJava {
 		//url="http://60.191.53.35:8750/unionmanager";
 		Document doc=null;
 		//doc=Jsoup.connect(url).header("User-Agent", "Mozilla/5.0 (Windows NT 5.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.101 Safari/537.36").header("Accept-Encoding", "").get();
-		doc=Jsoup.connect(url).header("User-Agent", "Alipay OTP Client").header("Accept-Encoding", "gzip,deflate,sdch").header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8").get();
+		doc=Jsoup.connect(url).header("User-Agent", "Alipay OTP Client").header("Accept-Encoding", "gzip,deflate,sdch").header("Accept", "text/html,application/xhtml+xml,application/json,application/xml;q=0.9,image/webp,*/*;q=0.8").get();
 		System.out.println(doc.html());
 		/**
 		Document doc = Jsoup.connect("http://example.com")
