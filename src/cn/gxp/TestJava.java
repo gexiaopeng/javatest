@@ -8,7 +8,9 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 
@@ -55,8 +57,9 @@ public class TestJava {
 			//base64();
 			//getHtml();
 			//getPageSource();
-			httpclientGet();
+			//httpclientGet();
 			//httpclientPost();
+			testHasAnImageSearchPage();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -139,9 +142,22 @@ public class TestJava {
 		String html = driver.getPageSource();
 		System.out.println(html);
 	}
-	private static void jsoup(){
+	private static void testHasAnImageSearchPage() throws Exception {  
+		String url="http://www.baidu.com/";
+		WebDriver page = new HtmlUnitDriver(); 
+		page.get(url);  
 
-	}
+		WebElement searchBox = page.findElement(By.name("wd"));  
+		searchBox.sendKeys("JavaEye");  
+
+
+		WebElement subBtn = page.findElement(By.id("su"));  
+		subBtn.submit();  
+		//WebElement result = page.findElement(By.linkText("http://www.iteye.com")); 
+		WebElement result = page.findElement(By.linkText("javaeye_百度百科"));
+		System.out.println("result:"+result.getAttribute("href"));
+		//assertNotNull(result);  
+	}  
 	public static void synJava(){
 		SynJava synJava=new SynJava();
 		ThreadA threadA =new ThreadA(synJava);
