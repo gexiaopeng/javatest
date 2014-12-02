@@ -56,7 +56,7 @@ public class TestJava {
 			//getHtml();
 			//getPageSource();
 			httpclientGet();
-			httpclientPost();
+			//httpclientPost();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,28 +84,29 @@ public class TestJava {
 	private static void httpclientGet() throws Exception{
 		String url="http://js.iwififree.com/wifiPortal/portal.jhtml?alipaytoken=alipaytoken888&test=gggxp你好吗？";
 		url="http://60.191.53.35:8750/unionmanager";
-		//url="http://js.iwififree.com/wifiPortal/portal.jhtml?alipaytoken=alipaytoken888&test="+URLEncoder.encode("gggxp我","utf-8");
-		GetMethod post=new GetMethod(url);  
-		post.setRequestHeader("User-Agent", "Alipay OTP Client");
+		url="http://js.iwififree.com/wifiPortal/portal.jhtml";
+		GetMethod get=new GetMethod(url);  
+		get.setQueryString("alipaytoken=alipaytoken888");
+		get.setRequestHeader("User-Agent", "Alipay OTP Client");
 		try{
-			int statusCode=client.executeMethod(post);
+			int statusCode=client.executeMethod(get);
 			System.out.println("statusCode:"+statusCode);
-			System.out.println("location:"+post.getResponseHeader("Location"));
+			System.out.println("location:"+get.getResponseHeader("Location"));
 			if(statusCode==200){
-				System.out.println("body:"+post.getResponseBodyAsString());
+				System.out.println("body:"+get.getResponseBodyAsString());
 			}
 		}catch(Exception e){
 			throw e;
 		}finally{
-			post.releaseConnection();
-			post=null;
+			get.releaseConnection();
+			get=null;
 		}
 	}
 	private static void httpclientPost() throws Exception{
 		String url="http://js.iwififree.com/wifiPortal/portal.jhtml?alipaytoken=alipaytoken888&test=gggxp你好吗？";
 		url="http://60.191.53.35:8750/unionmanager";
 		//url="http://js.iwififree.com/wifiPortal/portal.jhtml?alipaytoken=alipaytoken888&test="+URLEncoder.encode("gggxp我","utf-8");
-		PostMethod post=new PostMethod(url);  
+		PostMethod post=new PostMethod(url); 
 		post.setRequestHeader("User-Agent", "Alipay OTP Client");
 		try{
 			int statusCode=client.executeMethod(post);
