@@ -104,6 +104,7 @@ public class AES {
 	public static void main(String[] args) {
 		try {
 			String content = "test111111111111erter我是登陆福建额外连接?=-2341"; 
+			content="1234567890";
 			String password = "1234567811111111"; 
 			password="02060F080B0802040E0F0409090A050C";
 			//加密 
@@ -111,7 +112,7 @@ public class AES {
 			byte[] encryptResult = encrypt(content, password); 
 			String encryptResultStr = Base64.encodeBase64URLSafeString(encryptResult); 
 			//encryptResultStr=new String(Base64.encodeBase64(encryptResult));
-			System.out.println("加密后：" + encryptResultStr); 
+			System.out.println("加密后：" + encryptResultStr+"|"+encryptResultStr.length()); 
 			//解密 
 			byte[] decryptResult = decrypt(Base64.decodeBase64(encryptResultStr),password);
 			System.out.println("解密后：" + new String(decryptResult,"utf-8"));
