@@ -89,7 +89,7 @@ public class TestJava {
 		url="http://60.191.53.35:8750/unionmanager";
 		url="http://js.iwififree.com/wifiPortal/portal.jhtml";
 		GetMethod get=new GetMethod(url);  
-		get.setQueryString("alipaytoken=alipaytoken888&h3cacip=235&apname="+URLEncoder.encode("ret8","utf-8"));
+		get.setQueryString("alipaytoken=alipaytoken888&h3cacip=235&apname="+URLEncoder.encode("你好ret8","utf-8"));
 		get.setRequestHeader("User-Agent", "Alipay OTP Client");
 		try{
 			int statusCode=client.executeMethod(get);
