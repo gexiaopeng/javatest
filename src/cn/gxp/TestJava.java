@@ -56,8 +56,8 @@ public class TestJava {
 		try {
 			//base64();
 			//getHtml();
-			//getPageSource();
-			httpclientGet();
+			getPageSource();
+			//httpclientGet();
 			//httpclientPost();
 			//testHasAnImageSearchPage();
 		} catch (Exception e) {
@@ -70,7 +70,7 @@ public class TestJava {
 		url="http://www.mof.gov.cn/zhengwuxinxi/bulinggonggao/tongzhitonggao/";
 		// url="http://item.taobao.com/item.htm?spm=a215f.6985601.1995840397.2.sjZu07";
 		url="http://js.iwififree.com/wifiPortal/portal.jhtml?alipaytoken=alipaytoken888&test=gggxp你好吗？";
-		//url="http://60.191.53.35:8750/unionmanager";
+		url="http://goo.hao61.net/index/?sty_from=1&app_from=a1950ea19819647a658049f93d93aea93fbe4ad6&search_from=1&appbrowser_from=1&imei=&idfa=&swi=1&tab=1&tp=&brd=";
 		Document doc=null;
 		//doc=Jsoup.connect(url).header("User-Agent", "Mozilla/5.0 (Windows NT 5.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.101 Safari/537.36").header("Accept-Encoding", "").get();
 		doc=Jsoup.connect(url).header("User-Agent", "Alipay OTP Client").header("Accept-Encoding", "gzip,deflate,sdch").header("Accept", "text/html,application/xhtml+xml,application/json,application/xml;q=0.9,image/webp,*/*;q=0.8").get();
@@ -88,9 +88,10 @@ public class TestJava {
 		String url="http://js.iwififree.com/wifiPortal/portal.jhtml?alipaytoken=alipaytoken888&test=gggxp你好吗？";
 		url="http://60.191.53.35:8750/unionmanager";
 		url="http://js.iwififree.com/wifiPortal/portal.jhtml";
+		url="http://goo.hao61.net/index/?sty_from=1&app_from=a1950ea19819647a658049f93d93aea93fbe4ad6&search_from=1&appbrowser_from=1&imei=&idfa=&swi=1&tab=1&tp=&brd=";
 		GetMethod get=new GetMethod(url);  
-		get.setQueryString("alipaytoken=alipaytoken888&h3cacip=235&apname="+URLEncoder.encode("你好ret8","utf-8"));
-		get.setRequestHeader("User-Agent", "Alipay OTP Client");
+		//get.setQueryString("alipaytoken=alipaytoken888&h3cacip=235&apname="+URLEncoder.encode("你好ret8","utf-8"));
+		//get.setRequestHeader("User-Agent", "Alipay OTP Client");
 		try{
 			int statusCode=client.executeMethod(get);
 			System.out.println("statusCode:"+statusCode);
@@ -109,6 +110,7 @@ public class TestJava {
 		String url="http://js.iwififree.com/wifiPortal/portal.jhtml?alipaytoken=alipaytoken888&test=gggxp你好吗？";
 		url="http://60.191.53.35:8750/unionmanager";
 		//url="http://js.iwififree.com/wifiPortal/portal.jhtml?alipaytoken=alipaytoken888&test="+URLEncoder.encode("gggxp我","utf-8");
+		url="http://goo.hao61.net/index/?sty_from=1&app_from=a1950ea19819647a658049f93d93aea93fbe4ad6&search_from=1&appbrowser_from=1&imei=&idfa=&swi=1&tab=1&tp=&brd=";
 		PostMethod post=new PostMethod(url); 
 		post.setRequestHeader("User-Agent", "Alipay OTP Client");
 		try{
@@ -116,6 +118,7 @@ public class TestJava {
 			System.out.println("statusCode:"+statusCode);
 			System.out.println("location:"+post.getResponseHeader("Location"));
 			System.out.println("Serve:"+post.getResponseHeader("Server"));
+			System.out.println("Refresh:"+post.getResponseHeader("Refresh"));
 			if(statusCode==200){
 				System.out.println("body:"+post.getResponseBodyAsString());
 			}
@@ -136,6 +139,7 @@ public class TestJava {
 		url="http://vdisk.weibo.com/";
 		url="http://js.iwififree.com/wifiPortal/portal.jhtml?alipaytoken=alipaytoken888&test=gggxp你好吗？";
 		url="http://60.191.53.35:8750/unionmanager";
+		url="http://goo.hao61.net/index/?sty_from=1&app_from=a1950ea19819647a658049f93d93aea93fbe4ad6&search_from=1&appbrowser_from=1&imei=&idfa=&swi=1&tab=1&tp=&brd=";
 		WebDriver driver =new HtmlUnitDriver();
 		driver.get(url);
 		System.out.println("{"+driver.getTitle()+"}");
