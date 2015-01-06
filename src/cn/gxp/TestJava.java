@@ -2,6 +2,7 @@ package cn.gxp;
 
 import java.net.URLEncoder;
 
+import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -56,8 +57,8 @@ public class TestJava {
 		try {
 			//base64();
 			//getHtml();
-			getPageSource();
-			//httpclientGet();
+			//getPageSource();
+			httpclientGet();
 			//httpclientPost();
 			//testHasAnImageSearchPage();
 		} catch (Exception e) {
@@ -95,7 +96,12 @@ public class TestJava {
 		try{
 			int statusCode=client.executeMethod(get);
 			System.out.println("statusCode:"+statusCode);
-			System.out.println("location:"+get.getResponseHeader("Location"));
+			Header[] hs=get.getResponseHeaders();
+			System.out.println("----Header:-begin----");
+			for(Header hd:hs){
+				System.out.println(hd.getName()+"="+hd.getValue());
+			}
+			System.out.println("----Header:---end--");
 			if(statusCode==200){
 				System.out.println("body:"+get.getResponseBodyAsString());
 			}
@@ -140,6 +146,7 @@ public class TestJava {
 		url="http://js.iwififree.com/wifiPortal/portal.jhtml?alipaytoken=alipaytoken888&test=gggxp你好吗？";
 		url="http://60.191.53.35:8750/unionmanager";
 		url="http://goo.hao61.net/index/?sty_from=1&app_from=a1950ea19819647a658049f93d93aea93fbe4ad6&search_from=1&appbrowser_from=1&imei=&idfa=&swi=1&tab=1&tp=&brd=";
+		//url="http://goo.hao61.net/index/?sty_from=3&app_from=057e6074fe9da229d4c015814b534cb0e2e89e49&search_from=3&appbrowser_from=3&imei=&idfa=&swi=3&tab=3&tp=&brd=";
 		WebDriver driver =new HtmlUnitDriver();
 		driver.get(url);
 		System.out.println("{"+driver.getTitle()+"}");
