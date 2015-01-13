@@ -90,6 +90,9 @@ public class TestJava {
 		url="http://60.191.53.35:8750/unionmanager";
 		url="http://js.iwififree.com/wifiPortal/portal.jhtml";
 		url="http://goo.hao61.net/index/?sty_from=1&app_from=a1950ea19819647a658049f93d93aea93fbe4ad6&search_from=1&appbrowser_from=1&imei=&idfa=&swi=1&tab=1&tp=&brd=";
+		url="http://www.miadu.com/app/1.html";
+		url="https://www.miadu.com/app/1.php";
+		url="https://www.miadu.com/app/4.php";
 		GetMethod get=new GetMethod(url);  
 		//get.setQueryString("alipaytoken=alipaytoken888&h3cacip=235&apname="+URLEncoder.encode("你好ret8","utf-8"));
 		//get.setRequestHeader("User-Agent", "Alipay OTP Client");
