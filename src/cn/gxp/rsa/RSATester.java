@@ -16,16 +16,16 @@ public class RSATester {
             Map<String, Object> keyMap = RSAUtils.genKeyPair();  
             publicKey = RSAUtils.getPublicKey(keyMap);  
             privateKey = RSAUtils.getPrivateKey(keyMap);  
-            System.err.println("公钥: \n\r" + publicKey);  
-            System.err.println("私钥： \n\r" + privateKey);  
+            System.out.println("公钥:\r\n" + publicKey);  
+            System.out.println("私钥：\r\n" + privateKey);  
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
     }  
       
     public static void main(String[] args) throws Exception {  
-        test();  
-        testSign();  
+        //test();  
+        //testSign();  
     }  
   
     static void test() throws Exception {  
