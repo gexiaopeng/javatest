@@ -34,7 +34,7 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class AES {
 	/**
-	 * 加密
+	 * 加密(代替des)
 	 * 
 	 * @param content 需要加密的内容
 	 * @param password  加密密码

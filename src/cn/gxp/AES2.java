@@ -15,7 +15,7 @@ import javax.crypto.spec.SecretKeySpec;
  * 
  * @author wchun
  * 
- * AES128 算法，加密模式为ECB，填充模式为 pkcs7（实际就是pkcs5）
+ * AES128 算法，加密模式为ECB，填充模式为 pkcs7（实际就是pkcs5）,代替des
  * 
  *
  */
