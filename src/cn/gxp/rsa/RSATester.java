@@ -1,7 +1,11 @@
 package cn.gxp.rsa;
 import java.util.Map;  
 
-  
+ /**
+  * 测试用例： 
+  * @author gxp
+  *
+  */
 public class RSATester {  
   
     static String publicKey;  

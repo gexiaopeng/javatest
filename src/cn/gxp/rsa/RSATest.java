@@ -16,7 +16,11 @@ import javax.crypto.Cipher;
     
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;     
-    
+ /**
+  * 生成RSA密钥、保存到文件、从文件读取、加密、解密等操作   
+  * @author gxp
+  *
+  */
 public class RSATest {     
     
     public static void main(String[] args) {     
