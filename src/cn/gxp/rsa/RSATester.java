@@ -25,7 +25,8 @@ public class RSATester {
       
     public static void main(String[] args) throws Exception {  
         //test();  
-        //testSign();  
+        //testSign(); 
+        //testSign2();
     }  
   
     static void test() throws Exception {  
@@ -55,6 +56,19 @@ public class RSATester {
         System.err.println("签名:\r" + sign);  
         boolean status = RSAUtils.verify(encodedData, publicKey, sign);  
         System.err.println("验证结果:\r" + status);  
-    }  
+    } 
+    static void testSign2() throws Exception {  
+       
+        String source = "这是一行测试RSA数字签名的无意义文字";  
+        System.out.println("原文字：\r\n" + source);  
+        byte[] data = source.getBytes();  
+       
+        String sign = RSAUtils.sign(data, privateKey);  
+        System.err.println("签名:\r" + sign);  
+        byte[] encodedData = RSAUtils.encryptByPrivateKey(data, privateKey); 
+        System.err.println("签名2:\r" + Base64Utils.encode(encodedData)); 
+        boolean status = RSAUtils.verify(data, publicKey, sign);  
+        System.err.println("验证结果:\r" + status);  
+    }    
       
 }  
