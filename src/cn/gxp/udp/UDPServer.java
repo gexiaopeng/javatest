@@ -30,7 +30,13 @@ import java.net.SocketException;
 public class UDPServer {
 	public static void main(String[] args){
 		try {
-			DatagramSocket  server = new DatagramSocket(5050);
+			DatagramSocket  server = null;
+			try {  
+				server=new DatagramSocket(5050); //实例化套间字，指定自己的port  
+			} catch (SocketException e) {  
+				System.out.println("Cannot open port!");  
+				System.exit(1);   
+			} 
 			byte[] recvBuf = new byte[100];
 			DatagramPacket recvPacket= new DatagramPacket(recvBuf , recvBuf.length);
 			System.out.println("Server---recvPacket....");
@@ -44,7 +50,7 @@ public class UDPServer {
 			byte[] sendBuf= sendStr.getBytes();
 			DatagramPacket sendPacket = new DatagramPacket(sendBuf , sendBuf.length , addr , port );
 			//server.send(sendPacket);
-			
+
 			server.close();
 			System.out.println("server closed");
 		} catch (Exception e) {
