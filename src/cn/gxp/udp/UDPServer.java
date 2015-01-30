@@ -55,6 +55,8 @@ public class UDPServer {
 
 			server.close();
 			System.out.println("server closed");
+		} catch (IOException e) {
+			System.err.println("IOException! errmsg:"+e.getMessage());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

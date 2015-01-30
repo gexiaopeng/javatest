@@ -49,7 +49,7 @@ public class UDPClient {
 			client.close();
 			System.out.println("client closed");
 		}catch (IOException e) {
-			System.err.println("Receive timed out!");
+			System.err.println("IOException! errmsg:"+e.getMessage());
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
