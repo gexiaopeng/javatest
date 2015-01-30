@@ -33,10 +33,13 @@ public class UDPServer {
 		try {
 			int sport=2000;
 			server=new DatagramSocket(sport); //实例化套间字，指定自己的port  
-			server.setSoTimeout(2000);
+			server.setReceiveBufferSize(+server.getReceiveBufferSize()*2);
+			System.out.println("Server---ReceiveBufferSize:"+server.getReceiveBufferSize());
+			System.out.println("Server---SendBufferSize:"+server.getSendBufferSize());
+			//server.setSoTimeout(2000);
 			while(true){
 				try {
-					byte[] recvBuf = new byte[100];
+					byte[] recvBuf = new byte[1024];
 					DatagramPacket recvPacket= new DatagramPacket(recvBuf , recvBuf.length);
 					System.out.println("Server---recvPacket....");
 					server.receive(recvPacket);
@@ -44,7 +47,7 @@ public class UDPServer {
 					String recvStr = new String(recvPacket.getData() , 0 , recvPacket.getLength());
 					int port = recvPacket.getPort();
 					InetAddress addr = recvPacket.getAddress();
-					System.out.println("Server recv port:"+port+",ip:"+addr.toString()+"[" + recvStr+"]");
+					System.out.println("Server recv port:"+port+",ip:"+addr.getHostAddress()+"[" + recvStr+"]");
 					String sendStr = "Hello ! I'm Server";
 					byte[] sendBuf= sendStr.getBytes();
 					DatagramPacket sendPacket = new DatagramPacket(sendBuf , sendBuf.length , addr , port );
