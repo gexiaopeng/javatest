@@ -49,7 +49,7 @@ public class UDPServer {
 			String sendStr = "Hello ! I'm Server";
 			byte[] sendBuf= sendStr.getBytes();
 			DatagramPacket sendPacket = new DatagramPacket(sendBuf , sendBuf.length , addr , port );
-			//server.send(sendPacket);
+			server.send(sendPacket);
 
 			server.close();
 			System.out.println("server closed");
