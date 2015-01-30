@@ -31,8 +31,10 @@ public class UDPServer {
 	public static void main(String[] args){
 		try {
 			DatagramSocket  server = null;
-			try {  
-				server=new DatagramSocket(5050); //实例化套间字，指定自己的port  
+			try {
+				int sport=5050;
+				server=new DatagramSocket(sport); //实例化套间字，指定自己的port  
+				server.setSoTimeout(2000);
 			} catch (SocketException e) {  
 				System.out.println("Cannot open port!");  
 				System.exit(1);   
