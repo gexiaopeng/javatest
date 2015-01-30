@@ -30,13 +30,18 @@ import java.net.UnknownHostException;
  */
 public class UDPClient {
 	public static void main(String[] args){
-        try {
-			DatagramSocket client = new DatagramSocket();
-			client.setSoTimeout(2000);
+		DatagramSocket client=null;
+		try {
+			int timeout=20000;
+			int port = 2000;
+			String ip="127.0.0.1";//127.0.0.1
+			ip="61.155.116.145";
+			client = new DatagramSocket();
+			client.setSoTimeout(timeout);
 			String sendStr = "Hello! I'm Client";
 			byte[] sendBuf= sendStr.getBytes();
-			InetAddress addr = InetAddress.getByName("127.0.0.1");
-			int port = 5050;
+			InetAddress addr = InetAddress.getByName(ip);
+
 			DatagramPacket sendPacket = new DatagramPacket(sendBuf ,sendBuf.length , addr , port);
 			System.out.println("Client send...." );
 			client.send(sendPacket);
@@ -46,14 +51,16 @@ public class UDPClient {
 			client.receive(recvPacket);
 			String recvStr = new String(recvPacket.getData() , 0 ,recvPacket.getLength());
 			System.out.println("Client 收到:" + recvStr);
-			client.close();
-			System.out.println("client closed");
-			
 		}catch (IOException e) {
 			System.err.println("IOException! errmsg:"+e.getMessage());
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
+		if(client!=null){
+			client.close();
+			System.out.println("client closed");
+		}
+
+	}
 }

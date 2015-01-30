@@ -31,7 +31,7 @@ public class UDPServer {
 	public static void main(String[] args){
 		DatagramSocket  server = null;
 		try {
-			int sport=5050;
+			int sport=2000;
 			server=new DatagramSocket(sport); //实例化套间字，指定自己的port  
 			server.setSoTimeout(2000);
 			while(true){
