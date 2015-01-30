@@ -48,6 +48,7 @@ public class UDPClient {
 			System.out.println("Client 收到:" + recvStr);
 			client.close();
 			System.out.println("client closed");
+			
 		}catch (IOException e) {
 			System.err.println("IOException! errmsg:"+e.getMessage());
 		}catch (Exception e) {
