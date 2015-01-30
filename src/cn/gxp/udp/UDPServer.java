@@ -33,19 +33,20 @@ public class UDPServer {
 			DatagramSocket  server = new DatagramSocket(5050);
 			byte[] recvBuf = new byte[100];
 			DatagramPacket recvPacket= new DatagramPacket(recvBuf , recvBuf.length);
-			System.out.println("---recvPacket....");
+			System.out.println("Server---recvPacket....");
 			server.receive(recvPacket);
-			System.out.println("---receive InetAddress:"+server.getInetAddress()+",LocalAddress:"+server.getLocalAddress().getHostAddress());
+			System.out.println("Server---receive InetAddress:"+server.getInetAddress()+",LocalAddress:"+server.getLocalAddress().getHostAddress());
 			String recvStr = new String(recvPacket.getData() , 0 , recvPacket.getLength());
 			int port = recvPacket.getPort();
 			InetAddress addr = recvPacket.getAddress();
-			System.out.println("recv port:"+port+",ip:"+addr.toString()+"[" + recvStr+"]");
+			System.out.println("Server recv port:"+port+",ip:"+addr.toString()+"[" + recvStr+"]");
 			String sendStr = "Hello ! I'm Server";
 			byte[] sendBuf= sendStr.getBytes();
 			DatagramPacket sendPacket = new DatagramPacket(sendBuf , sendBuf.length , addr , port );
-			server.send(sendPacket);
+			//server.send(sendPacket);
 			
 			server.close();
+			System.out.println("server closed");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
