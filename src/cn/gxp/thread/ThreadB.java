@@ -26,6 +26,7 @@ import cn.gxp.SynJava;
 public class ThreadB extends Thread {
 	private  SynJava  synJava;
 	public ThreadB(SynJava  synJava){
+		
 		this.synJava=synJava;
 	}
 	public void run(){
