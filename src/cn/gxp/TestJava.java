@@ -1,5 +1,6 @@
 package cn.gxp;
 
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 import org.apache.commons.httpclient.Header;
@@ -58,8 +59,8 @@ public class TestJava {
 			//base64();
 			//getHtml();
 			//getPageSource();
-			httpclientGet();
-			//httpclientPost();
+			//httpclientGet();
+			httpclientPost();
 			//testHasAnImageSearchPage();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -92,7 +93,7 @@ public class TestJava {
 		url="http://goo.hao61.net/index/?sty_from=1&app_from=a1950ea19819647a658049f93d93aea93fbe4ad6&search_from=1&appbrowser_from=1&imei=&idfa=&swi=1&tab=1&tp=&brd=";
 		//url="http://www.miadu.com/app/1.html";
 		//url="https://www.miadu.com/app/1.php";
-		//url="https://www.miadu.com/app/4.php";
+		url="http://18she.tmall.com/campaign.htm?spm=a1z10.1-b.w5002-2910765926.3.sUbnhu";
 		GetMethod get=new GetMethod(url);  
 		//get.setQueryString("alipaytoken=alipaytoken888&h3cacip=235&apname="+URLEncoder.encode("你好ret8","utf-8"));
 		//get.setRequestHeader("User-Agent", "Alipay OTP Client");
@@ -120,6 +121,10 @@ public class TestJava {
 		url="http://60.191.53.35:8750/unionmanager";
 		//url="http://js.iwififree.com/wifiPortal/portal.jhtml?alipaytoken=alipaytoken888&test="+URLEncoder.encode("gggxp我","utf-8");
 		url="http://goo.hao61.net/index/?sty_from=1&app_from=a1950ea19819647a658049f93d93aea93fbe4ad6&search_from=1&appbrowser_from=1&imei=&idfa=&swi=1&tab=1&tp=&brd=";
+		url="http://18she.tmall.com/campaign.htm?spm=a1z10.1-b.w5002-2910765926.3.sUbnhu";
+		String targ="http%3a%2f%2f18she.tmall.com%2fcampaign.htm%3fspm%3da1z10.1-b.w5002-2910765926.3.sUbnhu%26tbpm%3d1";
+		System.out.println("1url:"+url);
+		System.out.println("2url:"+URLDecoder.decode(targ, "utf-8"));
 		PostMethod post=new PostMethod(url); 
 		post.setRequestHeader("User-Agent", "Alipay OTP Client");
 		try{
@@ -149,7 +154,7 @@ public class TestJava {
 		url="http://js.iwififree.com/wifiPortal/portal.jhtml?alipaytoken=alipaytoken888&test=gggxp你好吗？";
 		url="http://60.191.53.35:8750/unionmanager";
 		url="http://goo.hao61.net/index/?sty_from=1&app_from=a1950ea19819647a658049f93d93aea93fbe4ad6&search_from=1&appbrowser_from=1&imei=&idfa=&swi=1&tab=1&tp=&brd=";
-		//url="http://goo.hao61.net/index/?sty_from=3&app_from=057e6074fe9da229d4c015814b534cb0e2e89e49&search_from=3&appbrowser_from=3&imei=&idfa=&swi=3&tab=3&tp=&brd=";
+		url="http://18she.tmall.com/campaign.htm?spm=a1z10.1-b.w5002-2910765926.3.sUbnhu";
 		WebDriver driver =new HtmlUnitDriver();
 		driver.get(url);
 		System.out.println("{"+driver.getTitle()+"}");

@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;     
 import java.security.PublicKey;     
 import java.security.SecureRandom;     
+import java.security.Security;
 import java.security.interfaces.RSAPrivateKey;     
 import java.security.interfaces.RSAPublicKey;     
 import java.security.spec.InvalidKeySpecException;     
@@ -24,19 +25,21 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 public class RSATest {     
     
     public static void main(String[] args) {     
-        try {     
+        try { 
             RSATest encrypt = new RSATest();     
             String encryptText = "encryptText";     
     
-            // Generate keys     
+            // Generate keys  
+           
             KeyPair keyPair = encrypt.generateKey();     
             RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();     
             RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();     
     
             byte[] e = encrypt.encrypt(publicKey, encryptText.getBytes());     
-            byte[] de = encrypt.decrypt(privateKey, e);     
-            System.out.println(toHexString(e));     
-            System.out.println(toHexString(de));     
+            //byte[] de = encrypt.decrypt(privateKey, e);     
+            //System.out.println(toHexString(e));     
+            //System.out.println(toHexString(de)); 
+               
         } catch (Exception e) {     
             e.printStackTrace();     
         }     
@@ -110,8 +113,7 @@ public class RSATest {
     protected byte[] encrypt(RSAPublicKey publicKey, byte[] data) {     
         if (publicKey != null) {     
             try {     
-                Cipher cipher = Cipher.getInstance("RSA",     
-                        new BouncyCastleProvider());     
+                Cipher cipher = Cipher.getInstance("RSA",      new BouncyCastleProvider());     
                 cipher.init(Cipher.ENCRYPT_MODE, publicKey);     
                 return cipher.doFinal(data);     
             } catch (Exception e) {     

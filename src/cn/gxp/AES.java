@@ -104,9 +104,9 @@ public class AES {
 	public static void main(String[] args) {
 		try {
 			String content = "test111111111111erter我是登陆福建额外连接?=-2341"; 
-			content="1234567890";
-			String password = "1234567811111111"; 
-			password="02060F080B0802040E0F0409090A050C";
+			//content="1234567890";
+			String password = "12"; 
+			//password="02060F080B0802040E0F0409090A050C";
 			//加密 
 			System.out.println("加密前：" + content); 
 			byte[] encryptResult = encrypt(content, password); 

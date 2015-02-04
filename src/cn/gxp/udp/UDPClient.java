@@ -36,7 +36,7 @@ public class UDPClient {
 			int port = 2000;
 			String ip="127.0.0.1";//127.0.0.1
 			//ip="61.155.116.145";
-			client = new DatagramSocket(50100);
+			client = new DatagramSocket();
 			client.setSoTimeout(timeout);
 			String sendStr = "Hello! I'm Client";
 			byte[] sendBuf= sendStr.getBytes();
