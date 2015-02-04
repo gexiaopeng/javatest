@@ -39,6 +39,7 @@ public class UDPServer {
 			//server.setSoTimeout(2000);
 			while(true){
 				try {
+					
 					byte[] recvBuf = new byte[1024];
 					DatagramPacket recvPacket= new DatagramPacket(recvBuf , recvBuf.length);
 					System.out.println("Server---recvPacket....");
