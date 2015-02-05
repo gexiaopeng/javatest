@@ -33,7 +33,7 @@ public class UDPServer {
 		try {
 			int sport=2000;
 			server=new DatagramSocket(sport); //实例化套间字，指定自己的port  
-			server.setReceiveBufferSize(+server.getReceiveBufferSize()*2);
+			server.setReceiveBufferSize(server.getReceiveBufferSize()*2);
 			System.out.println(0xee+" Server---ReceiveBufferSize:"+server.getReceiveBufferSize());
 			System.out.println("Server---SendBufferSize:"+server.getSendBufferSize());
 			//server.setSoTimeout(2000);
