@@ -24,6 +24,7 @@ public class SynJava {
 	Object objC=new Object();
 	Object objD=new Object();
 	public synchronized void synA(){
+		
 	}
 	public synchronized void synB(){
 	}
