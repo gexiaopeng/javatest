@@ -35,6 +35,7 @@ public class AES2 {
 
 		//初始化keyGen
 		try {
+			
 			keyGen=KeyGenerator.getInstance("AES");
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
