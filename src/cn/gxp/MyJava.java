@@ -22,6 +22,6 @@ package cn.gxp;
  */
 public class MyJava {
  public static void main(String[] args) {
-	//12
+	//123
 }
 }
