@@ -16,8 +16,8 @@ public class RSATester {
             Map<String, Object> keyMap = RSAUtils.genKeyPair();  
             publicKey = RSAUtils.getPublicKey(keyMap);  
             privateKey = RSAUtils.getPrivateKey(keyMap);  
-            System.out.println("公钥:\r\n" + publicKey);  
-            System.out.println("私钥：\r\n" + privateKey);  
+            System.out.println("公钥:\r\n" + publicKey.replace("\n", ""));  
+            System.out.println("私钥：\r\n" + privateKey.replace("\n", ""));  
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
