@@ -44,7 +44,7 @@ public class AES {
 	public static byte[] encrypt(String content, String password) throws Exception { 
 
 		KeyGenerator kgen = KeyGenerator.getInstance("AES"); 
-		kgen.init(128, new SecureRandom(password.getBytes())); 
+		kgen.init(128, new SecureRandom(password.getBytes("utf-8"))); 
 		SecretKey secretKey = kgen.generateKey(); 
 		byte[] enCodeFormat = secretKey.getEncoded(); 
 		SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES"); 
@@ -62,7 +62,7 @@ public class AES {
 	 */ 
 	public static byte[] decrypt(byte[] content, String password) throws Exception { 
 		KeyGenerator kgen = KeyGenerator.getInstance("AES"); 
-		kgen.init(128, new SecureRandom(password.getBytes())); 
+		kgen.init(128, new SecureRandom(password.getBytes("utf-8"))); 
 		SecretKey secretKey = kgen.generateKey(); 
 		byte[] enCodeFormat = secretKey.getEncoded(); 
 		SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");             
@@ -103,7 +103,7 @@ public class AES {
 	} 
 	public static void main(String[] args) {
 		try {
-			String content = "test111111111111erter我是登陆福建额外连接?=-2341"; 
+			String content = "test11111111111=/hgjk1erter我是登陆福建额外连接?=-2341"; 
 			//content="1234567890";
 			String password = "12"; 
 			//password="02060F080B0802040E0F0409090A050C";
@@ -113,6 +113,9 @@ public class AES {
 			String encryptResultStr = Base64.encodeBase64URLSafeString(encryptResult); 
 			//encryptResultStr=new String(Base64.encodeBase64(encryptResult));
 			System.out.println("加密后：" + encryptResultStr+"|"+encryptResultStr.length()); 
+			String sencryptResultStr="IvH-XosaMjQ82APLAZf4P-whnY3jrMQYP9fawPeWYlFqJnZ-rjvdnAVfdeu2WW6bgZPtr_RgasM6ThNQfs7HX_UMAxjhkB0re9fIVNtsLzU";
+			byte ss[]=Base64.decodeBase64(sencryptResultStr);
+			System.out.println("ssl:"+ss.length);
 			//解密 
 			byte[] decryptResult = decrypt(Base64.decodeBase64(encryptResultStr),password);
 			System.out.println("解密后：" + new String(decryptResult,"utf-8"));
