@@ -47,7 +47,7 @@ public class IdGen {
 	}
 
 	public IdGen() {
-		this(0L, 0L);
+		this(6L, 6L);
 	}
 
 	public IdGen(long workerId, long datacenterId) {
@@ -98,9 +98,50 @@ public class IdGen {
 	protected long timeGen() {
 		return System.currentTimeMillis();
 	}
+	public static byte[] long2bytes(long num) {  
+	    byte[] b = new byte[8];  
+	    for (int i=0;i<8;i++) {  
+	        b[i] = (byte)(num>>>(56-(i*8)));  
+	    }  
+	    return b;  
+	}
+	public static long bytes2long(byte[] b) {  
+	    long temp = 0;  
+	    long res = 0;  
+	    for (int i=0;i<8;i++) {  
+	        res <<= 8;  
+	        temp = b[i] & 0xff;  
+	        res |= temp;  
+	    }  
+	    return res;  
+	}  
 	public static void main(String[] args) {
-		 IdGen idGen = IdGen.get();
-		 System.out.println(Long.MAX_VALUE);
-		 System.out.println(idGen.nextId());
+		IdGen idGen = IdGen.get();
+		for(int i=0;i<1000;i++){
+			//System.out.println(idGen.nextId());
+		}
+		long time=System.currentTimeMillis();
+		System.out.println(time);
+		byte[] b=long2bytes(time);
+		//System.out.println(b.length);
+		for(int i=0;i<b.length;i++){
+			System.out.println(b[i]);
+		}
+		b[2]=0;
+		time= bytes2long(b);
+		long t=100*365*24*60*60l;
+		System.out.println(t);
+		System.out.println(time);
+		 time=System.currentTimeMillis();
+		 b=long2bytes(time+t);
+		System.out.println("===");
+		for(int i=0;i<b.length;i++){
+			System.out.println(b[i]);
+		}
+		b[2]=0;
+		time= bytes2long(b);
+		System.out.println(time);
+		System.out.println(Short.MAX_VALUE);
+		System.out.println(Short.MIN_VALUE);
 	}
 }
