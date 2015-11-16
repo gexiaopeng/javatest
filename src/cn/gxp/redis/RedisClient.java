@@ -1,7 +1,9 @@
 package cn.gxp.redis;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import redis.clients.jedis.Jedis;
@@ -222,8 +224,14 @@ public class RedisClient
 			redisClient = RedisClientPool.jedisPool.getResource(); 
 			//System.out.println("redisClient:"+redisClient);
 			String key="mylist";
-			Object ob=redisClient.getSet(key, "d");
-			System.out.println("ob:["+ob+"]");
+			Set set=redisClient.smembers(key);
+			System.out.println("set:["+set+"]");
+			Iterator t1=set.iterator() ;   
+	        while(t1.hasNext()){   
+	            Object obj1=t1.next();   
+	            System.out.println(obj1);   
+	        }   
+			
 
 		}   
 		catch (Exception e)  
