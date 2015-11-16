@@ -1,5 +1,7 @@
 package cn.gxp.redis;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -222,10 +224,22 @@ public class RedisClient
 		try  
 		{  
 			redisClient = RedisClientPool.jedisPool.getResource(); 
+			Set myset=new HashSet();
+			List list=new ArrayList();
+			myset.add("00");
+			myset.add("01");
+			myset.add(null);
+			myset.add(null);
+			list.add("00");
+			list.add("03");
+			list.add(null);
+			list.add(null);
+			System.out.println("myset:"+myset+"");
+			System.out.println("list:"+list+"");
 			//System.out.println("redisClient:"+redisClient);
 			String key="mylist";
 			Set set=redisClient.smembers(key);
-			System.out.println("set:["+set+"]");
+			System.out.println("set:"+set+"");
 			Iterator t1=set.iterator() ;   
 	        while(t1.hasNext()){   
 	            Object obj1=t1.next();   
