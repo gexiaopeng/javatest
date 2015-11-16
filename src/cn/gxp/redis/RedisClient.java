@@ -239,6 +239,8 @@ public class RedisClient
 			//System.out.println("redisClient:"+redisClient);
 			String key="mylist";
 			Set set=redisClient.smembers(key);
+			//redisClient.lrange(key, 0, -1);
+			//redisClient.
 			System.out.println("set:"+set+"");
 			Iterator t1=set.iterator() ;   
 	        while(t1.hasNext()){   
