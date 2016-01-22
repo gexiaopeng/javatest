@@ -281,7 +281,10 @@ public class RedisClient
 			}  
 			System.out.println("obj1");  
 			System.out.println(redisClient.brpop(10000, "pp"));
-			System.out.println(redisClient.brpop(1, "pp"));  
+			//System.out.println(redisClient.brpop(1, "pp")); 
+			System.out.println("kk:"+redisClient.incr("kk"));
+			System.out.println("kk:"+redisClient.incrBy("kk",9));
+			System.out.println("kk2:"+redisClient.get("kk"));
 		}   
 		catch (Exception e)  
 		{  
