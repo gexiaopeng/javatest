@@ -271,16 +271,17 @@ public class RedisClient
 			//System.out.println("redisClient:"+redisClient);
 			String key="mylist";
 			Set set=redisClient.smembers(key);
-			//redisClient.lrange(key, 0, -1);
+			redisClient.lpush("pp", "pstring");
 			//redisClient.
 			System.out.println("set:"+set+"");
 			Iterator t1=set.iterator() ;   
 			while(t1.hasNext()){   
 				Object obj1=t1.next();   
 				System.out.println(obj1);   
-			}   
-
-
+			}  
+			System.out.println("obj1");  
+			System.out.println(redisClient.brpop(10000, "pp"));
+			System.out.println(redisClient.brpop(1, "pp"));  
 		}   
 		catch (Exception e)  
 		{  
