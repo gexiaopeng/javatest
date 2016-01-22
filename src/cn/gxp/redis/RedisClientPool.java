@@ -47,6 +47,7 @@ public static RedisClientPool redisClientPool = getInstance();
    {  
        JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();  
        // 控制一个pool最多有多少个状态为idle的jedis实例  
+       
        jedisPoolConfig.setMaxIdle(1000); 
        // 最大能够保持空闲状态的对象数  
        jedisPoolConfig.setMaxIdle(300);  
