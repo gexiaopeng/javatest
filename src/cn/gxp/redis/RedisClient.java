@@ -47,7 +47,8 @@ public class RedisClient
 		try  
 		{  
 			redisClient = RedisClientPool.jedisPool.getResource();  
-			redisClient.hmset(flag,mapData);  
+			redisClient.hmset(flag,mapData);
+			
 		}   
 		catch (Exception e)  
 		{  
