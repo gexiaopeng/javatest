@@ -1,5 +1,10 @@
 package cn.gxp.redis;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -218,6 +223,33 @@ public class RedisClient
 
 		System.out.println(maps.size());  
 	} 
+	public static byte[] getBytes(Object obj){
+		byte[] bs=null;
+		ByteArrayOutputStream bos =  new ByteArrayOutputStream();
+		try {
+			ObjectOutputStream oos =  new ObjectOutputStream(bos);
+			oos.writeObject(obj);
+			bs = bos.toByteArray();
+			oos.close();
+			bos.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bs;
+	}
+	public static Object getObject(byte[] bs){
+		Object ob=null;
+		ByteArrayInputStream bis =  new ByteArrayInputStream(bs);
+		try {
+			ObjectInputStream inputStream =  new ObjectInputStream(bis);
+			ob=inputStream.readObject();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ob;
+	}
 	public static void main(String[] args)  throws Exception  
 	{           
 		Jedis redisClient = null;  
@@ -243,11 +275,11 @@ public class RedisClient
 			//redisClient.
 			System.out.println("set:"+set+"");
 			Iterator t1=set.iterator() ;   
-	        while(t1.hasNext()){   
-	            Object obj1=t1.next();   
-	            System.out.println(obj1);   
-	        }   
-			
+			while(t1.hasNext()){   
+				Object obj1=t1.next();   
+				System.out.println(obj1);   
+			}   
+
 
 		}   
 		catch (Exception e)  
