@@ -285,6 +285,7 @@ public class RedisClient
 			System.out.println("kk:"+redisClient.incr("kk"));
 			System.out.println("kk:"+redisClient.incrBy("kk",9));
 			System.out.println("kk2:"+redisClient.get("kk"));
+			System.out.println("kkkh:"+redisClient.decr("kkkh"));
 		}   
 		catch (Exception e)  
 		{  
