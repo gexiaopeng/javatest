@@ -282,6 +282,9 @@ public class RedisClient
 			System.out.println("obj1");  
 			redisClient.set("key blank", "dsdfsdf");
 			System.out.println("key blank:"+redisClient.get("key blank"));
+			List li=new ArrayList();
+			System.out.println(redisClient.set("lili".getBytes(), getBytes(li)));
+			System.out.println(getObject(redisClient.get("lili".getBytes())));
 			//System.out.println(redisClient.brpop(10000, "pp"));
 			//System.out.println(redisClient.brpop(1, "pp")); 
 			//System.out.println("kk:"+redisClient.incr("kk"));
