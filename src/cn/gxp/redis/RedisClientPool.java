@@ -4,6 +4,8 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 
+
+
 /** 
 *  取redis 连接池 
 * <一句话功能简述> 
@@ -45,16 +47,16 @@ public static RedisClientPool redisClientPool = getInstance();
     */  
    private static JedisPoolConfig initPoolConfig()  
    {  
-       JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();  
+       JedisPoolConfig jedisPoolConfig =new JedisPoolConfig(); 
        // 控制一个pool最多有多少个状态为idle的jedis实例  
        
-       jedisPoolConfig.setMaxIdle(1000); 
+       jedisPoolConfig.setMaxTotal(10000); 
        // 最大能够保持空闲状态的对象数  
        jedisPoolConfig.setMaxIdle(300);  
        // 超时时间  
-       //jedisPoolConfig.setMaxWaitMillis(1000);  
+       jedisPoolConfig.setMaxWaitMillis(1000);  
       // jedisPoolConfig.setMaxWait(1000);
-       jedisPoolConfig.setMaxWait(1000l);
+       //jedisPoolConfig.setMaxWait(1000l);
        // 在borrow一个jedis实例时，是否提前进行alidate操作；如果为true，则得到的jedis实例均是可用的；  
        jedisPoolConfig.setTestOnBorrow(true);  
        // 在还会给pool时，是否提前进行validate操作  
@@ -71,7 +73,7 @@ public static RedisClientPool redisClientPool = getInstance();
 	   JedisPoolConfig jedisPoolConfig = initPoolConfig();  
        String host = "192.168.10.211";//"localhost";  
        int port = 6378;//6379;  
-       int timeout = 60000;//60000;  
+       int timeout = 100000;//60000;  
        // 构造连接池  
        jedisPool = new JedisPool(jedisPoolConfig, host, port, timeout); 
        //jedisPool=new JedisPool(host, port);
