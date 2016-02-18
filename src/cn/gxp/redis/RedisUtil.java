@@ -112,7 +112,6 @@ public class RedisUtil {
 		}finally{
 			returnResource(jedis,broken);
 		}
-		logger.info("jedis:"+jedis);
 		return jedis;
 	}  
 
@@ -123,10 +122,7 @@ public class RedisUtil {
 	 */
 	public static void returnResource(final Jedis jedis,boolean broken) {
 		if (jedis != null && jedisPool !=null) {
-			logger.info("returnResource broken:"+broken);
-			
 			try {
-				Thread.sleep(3000);
 				if(broken){
 					jedisPool.returnBrokenResource(jedis);
 				}else{
