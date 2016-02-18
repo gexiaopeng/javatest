@@ -112,6 +112,7 @@ public class RedisUtil {
 		}finally{
 			returnResource(jedis,broken);
 		}
+		logger.info("jedis:"+jedis);
 		return jedis;
 	}  
 
@@ -122,7 +123,10 @@ public class RedisUtil {
 	 */
 	public static void returnResource(final Jedis jedis,boolean broken) {
 		if (jedis != null && jedisPool !=null) {
+			logger.info("returnResource broken:"+broken);
+			
 			try {
+				Thread.sleep(3000);
 				if(broken){
 					jedisPool.returnBrokenResource(jedis);
 				}else{
@@ -172,10 +176,18 @@ public class RedisUtil {
 	 * @return value
 	 */
 	public static String getString(String key){
-		if(getJedis() == null || !getJedis().exists(key)){
-			return null;
-		}
-		return getJedis().get(key);
+//		if(getJedis() == null || !getJedis().exists(key)){
+//			return null;
+//		}
+		Jedis j=getJedis();
+		String str= j.get(key);
+		logger.info("getJedis,str:["+str+"]");
+		return str;
+	}
+	public static void main(String[] args) {
+		//setString("Stringkey","bnn");
+		String str=getString("Stringkey");
+		logger.info("str:["+str+"]");
 	}
 
 }
