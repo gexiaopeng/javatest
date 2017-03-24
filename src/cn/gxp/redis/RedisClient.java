@@ -6,12 +6,15 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.apache.xerces.impl.dv.util.Base64;
 
 import redis.clients.jedis.Jedis;
 
@@ -48,21 +51,25 @@ public class RedisClient
 	 */  
 	public static void setMapDataToRedis(String flag,Map<String,String> mapData)  
 	{         
-		Jedis redisClient = null;  
+		Jedis redisClient = null; 
+		boolean broken=false;
 		try  
 		{  
 			redisClient = RedisClientPool.jedisPool.getResource();  
 			redisClient.hmset(flag,mapData);  
 		}   
 		catch (Exception e)  
-		{  
+		{ 
+			broken=true;
 			// 销毁对象  
 			RedisClientPool.jedisPool.returnBrokenResource(redisClient);  
 		}  
 		finally  
 		{  
-			// 还原到连接池  
-			RedisClientPool.jedisPool.returnResource(redisClient);  
+			if(!broken){
+				// 还原到连接池  
+				RedisClientPool.jedisPool.returnResource(redisClient); 
+			}
 		}  
 	}  
 
@@ -252,45 +259,81 @@ public class RedisClient
 	}
 	public static void main(String[] args)  throws Exception  
 	{           
-		Jedis redisClient = null;  
+		final Jedis redisClient = RedisClientPool.jedisPool.getResource();  
 		try  
 		{  
-			redisClient = RedisClientPool.jedisPool.getResource(); 
-			Set myset=new HashSet();
-			List list=new ArrayList();
-			myset.add("00");
-			myset.add("01");
-			myset.add(null);
-			myset.add(null);
-			list.add("00");
-			list.add("03");
-			list.add(null);
-			list.add(null);
-			System.out.println("myset:"+myset+"");
-			System.out.println("list:"+list+"");
-			//System.out.println("redisClient:"+redisClient);
-			String key="mylist";
-			Set set=redisClient.smembers(key);
-			redisClient.lpush("pp", "pstring");
-			//redisClient.
-			System.out.println("set:"+set+"");
-			Iterator t1=set.iterator() ;   
-			while(t1.hasNext()){   
-				Object obj1=t1.next();   
-				System.out.println(obj1);   
-			}  
-			System.out.println("obj1");  
-			redisClient.set("key blank", "dsdfsdf");
-			System.out.println("key blank:"+redisClient.get("key blank"));
-			List li=new ArrayList();
-			System.out.println(redisClient.set("lili".getBytes(), getBytes(li)));
-			System.out.println(getObject(redisClient.get("lili".getBytes())));
+			//redisClient = RedisClientPool.jedisPool.getResource(); 
+			//			Set myset=new HashSet();
+			//			List list=new ArrayList();
+			//			myset.add("00");
+			//			myset.add("01");
+			//			myset.add(null);
+			//			myset.add(null);
+			//			list.add("00");
+			//			list.add("03");
+			//			list.add(null);
+			//			list.add(null);
+			//			System.out.println("myset:"+myset+"");
+			//			System.out.println("list:"+list+"");
+			//			//System.out.println("redisClient:"+redisClient);
+			//			String key="mylist";
+			//			Set set=redisClient.smembers(key);
+			//			redisClient.lpush("pp", "pstring");
+			//			//redisClient.
+			//			System.out.println("set:"+set+"");
+			//			Iterator t1=set.iterator() ;   
+			//			while(t1.hasNext()){   
+			//				Object obj1=t1.next();   
+			//				System.out.println(obj1);   
+			//			} 
+			Map<String,String> map=new HashMap<String,String>();
+			map.put("key21", "mmm21");
+			map.put("key22", "tyu22");
+			//System.out.println(Base64.encode("123456789iuytrtrt".getBytes()));
+			//System.out.println(redisClient.set("ty".getBytes(), "value".getBytes()));
+			//redisClient.hm
+			//System.out.println("0:"+redisClient.exists("mylist"));
+			//redisClient.hset("taskApkeyMap:7072CFD61E6E", "key11", "");
+			//redisClient.hdel("taskApkeyMap:7072CFD61E6E", "key11");
+			//System.out.println("11:["+redisClient.hget("taskApkeyMap:7072CFD61E6E", "key11")+"]");
+			//System.out.println("12:"+redisClient.hget("mymap2", "key12"));
+			//System.out.println("2:"+redisClient.hgetAll("taskApkeysMap"));
+			//map.put("c", null);
+			//System.out.println(redisClient.hmset("keymap", map));
+			//System.out.println(redisClient.setex("keyex", 380, "bbbbb"));
+			//Thread.sleep(1000000);
+			//redisClient.hg
+			//			System.out.println("obj1");  
+			//			redisClient.set("key blank", "dsdfsdf");
+			//			System.out.println("key blank:"+redisClient.get("key blank"));
+			//			List li=new ArrayList();
+			//			System.out.println(redisClient.set("by0".getBytes(), new byte[0]));
+			//			byte[] bo=redisClient.get("by0".getBytes());
+			//			System.out.println(bo.length);
+			//List<String> lists=(List<String>) obj;
+			//System.out.println(obj.getClass());
 			//System.out.println(redisClient.brpop(10000, "pp"));
 			//System.out.println(redisClient.brpop(1, "pp")); 
 			//System.out.println("kk:"+redisClient.incr("kk"));
 			//System.out.println("kk:"+redisClient.incrBy("kk",9));
 			//System.out.println("kk2:"+redisClient.get("kk"));
 			//System.out.println("kkkh:"+redisClient.decr("kkkh"));
+			//System.out.println(redisClient.lpush("mylist", new String[]{"g","00","bbb"}));
+			//redisClient.m
+			//System.out.println(redisClient.exists("map2"));
+			//System.out.println(redisClient.del("map2"));
+			//System.out.println(redisClient.hset("map2", "field12", "value21"));
+			System.out.println(redisClient.hmset("map2", map));
+			//set操作
+			//redisClient.sadd(key, members) redisClient.smembers(key)
+			//redisClient.zadd(key, score, member)
+			
+			Map<String,String> m=redisClient.hgetAll("map2");
+			System.out.println(m.isEmpty()+","+m.size());
+			System.out.println(m);
+			//System.out.println(redisClient.hm);
+			//System.out.println(redisClient.get("myincr"));
+			
 		}   
 		catch (Exception e)  
 		{  
@@ -301,8 +344,10 @@ public class RedisClient
 		finally  
 		{  
 			// 还原到连接池  
-			RedisClientPool.jedisPool.returnResource(redisClient);  
+			close(redisClient); 
 		}     
 	} 
-
+	public  static void close(Jedis redisClient){
+		RedisClientPool.jedisPool.returnResource(redisClient); 
+	}
 }  
