@@ -71,8 +71,9 @@ public static RedisClientPool redisClientPool = getInstance();
    public static void init()  
    {  
 	   JedisPoolConfig jedisPoolConfig = initPoolConfig();  
-       String host = "192.168.10.211";//"localhost";  
-       int port = 6378;//6379;  
+       String host = "192.168.10.211";//"localhost";
+       host="60.191.53.35";
+       int port = 7001;//6379 7001; 
        int timeout = 100000;//60000;  
        // 构造连接池  
        jedisPool = new JedisPool(jedisPoolConfig, host, port, timeout); 
