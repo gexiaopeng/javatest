@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -17,6 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.xerces.impl.dv.util.Base64;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.Protocol.Keyword;
 
 /**
  * <p>
@@ -257,6 +259,7 @@ public class RedisClient
 		}
 		return ob;
 	}
+	@SuppressWarnings("deprecation")
 	public static void main(String[] args)  throws Exception  
 	{           
 		final Jedis redisClient = RedisClientPool.jedisPool.getResource();  
@@ -323,17 +326,32 @@ public class RedisClient
 			//System.out.println(redisClient.exists("map2"));
 			//System.out.println(redisClient.del("map2"));
 			//System.out.println(redisClient.hset("map2", "field12", "value21"));
-			System.out.println(redisClient.hmset("map2", map));
+			//System.out.println(redisClient.hmset("map2", map));
 			//set操作
 			//redisClient.sadd(key, members) redisClient.smembers(key)
 			//redisClient.zadd(key, score, member)
-			
-			Map<String,String> m=redisClient.hgetAll("map2");
-			System.out.println(m.isEmpty()+","+m.size());
-			System.out.println(m);
+			String str=null;
+			//nxxx NX|XX, NX -- Only set the key if it does not already exist. XX -- Only set the key if it already exist.
+			//expx EX|PX, expire time units: EX = seconds; PX = milliseconds
+			//System.out.println(redisClient.set("key", "value", "nxxx"));
+			//System.out.println(m.isEmpty()+","+m.size());
+			//System.out.println(m);
 			//System.out.println(redisClient.hm);
 			//System.out.println(redisClient.get("myincr"));
-			
+			//System.out.println("usertoken:"+redisClient.get("usertoken")+","+new Date().toLocaleString());
+
+
+			System.out.println("begin:"+redisClient.set("score", "300"));
+			for(int i=0;i<100;i++){
+				Thread t=new Thread(){
+					public void run(){
+						Jedis redisClient = RedisClientPool.jedisPool.getResource();
+						System.out.println(redisClient.incrBy("score", -1)+","+System.currentTimeMillis());
+					}
+				};
+				t.start();
+			}
+
 		}   
 		catch (Exception e)  
 		{  
